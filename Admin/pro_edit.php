@@ -1,4 +1,14 @@
+<?php
+include("db.php");
 
+if(isset($_GET["id"])){
+    $id = $_GET["id"];
+}
+$getdata = "SELECT product.*, category.cat_name FROM product LEFT JOIN category ON product.cat_id = category.id  WHERE product.id = $id";
+$res = mysqli_query($conn, $getdata);
+$data = mysqli_fetch_array($res);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

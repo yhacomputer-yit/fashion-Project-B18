@@ -182,7 +182,7 @@ if(isset($_POST["save"])){
 
                         <?php
                         $i = 1;
-                        $getdata = 'SELECT * FROM product';
+                        $getdata = 'SELECT product.*, category.cat_name FROM product LEFT JOIN category ON product.cat_id = category.id ';
                         $res = mysqli_query($conn, $getdata);
                         while ($data = mysqli_fetch_assoc($res)):
                         
@@ -193,10 +193,10 @@ if(isset($_POST["save"])){
                             <td><?php echo $data['id'] ?></td>
                             <td><?php echo $data['name'] ?></td>
                             <td><?php echo $data['price'] ?></td>
-                            <td><?php echo $data['cat_id'] ?></td>
+                            <td><?php echo $data['cat_name'] ?></td>
                             <td><?php echo $data['des'] ?></td>
                             <td><img src="../image/<?php echo $data['img'] ?>" width="100px" alt=""></td>
-                            <td><a href="pro_edit.html" type="submit" class="btn btn-outline-success">Edit</a>
+                            <td><a href="pro_edit.php?id=<?php echo $data['id'] ?>" type="submit" class="btn btn-outline-success">Edit</a>
                                 <a href="pro_delete.html" type="submit" class="btn btn-outline-danger">Delete</a></td>
                         </tr>
 
