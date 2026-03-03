@@ -1,4 +1,19 @@
+<?php
 
+include("db.php");
+
+if(isset($_POST["save"])){
+  $pro_id = $_POST["pro_id"];
+  $income = $_POST["inc_qty"];
+  $sale = 0;
+  date_default_timezone_set("Asia/Yangon");
+  $date = date("Y-m-d H:i:s");
+
+  
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -85,22 +100,27 @@
             <h3 class="my-3">Balance Quantity</h3>
 
             <form action="" class="p-3 mt-3" method="post">
-              <div class="mb-3 row">
-                <label for="inputPassword" class="col-sm-2 col-form-label"
-                  >Product Name</label
-                >
-                <div class="col-sm-10">
-                  <input type="text" name="pro_name" class="form-control" />
-                </div>
-              </div>
-              <div class="mb-3 row">
-                <label for="inputPassword" class="col-sm-2 col-form-label"
-                  >Date</label
-                >
-                <div class="col-sm-10">
-                  <input type="date" name="date" class="form-control" />
-                </div>
-              </div>
+               <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Product</label>
+                                <div class="col-sm-10">
+                                <select name="pro_id" id="" class="form-control">
+                                    <option value="">Choose Product</option>
+                                <?php
+                                
+                                $getproduct = "SELECT * FROM product";
+                                $res = mysqli_query($conn, $getproduct);
+                                
+                                while ($data = mysqli_fetch_assoc($res)) {
+                                
+                                ?>
+
+                                    <option value="<?php echo $data['id'] ?>"><?php echo $data['name'] ?></option>
+
+                                <?php } ?>
+
+                                </select>
+                                </div>
+                            </div>
               <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label"
                   >Income Quantity</label
@@ -140,10 +160,9 @@
                   <th>No</th>
                   <th>Balance ID</th>
                   <th>Product Name</th>
-                  <th>Order ID</th>
-                  <th>Order Quantity</th>
                   <th>Date</th>
                   <th>Income Quantity</th>
+                  <th>Sale Quantity</th>
                   <th>Balance</th>
                   <th>Action</th>
                 </tr>
@@ -153,10 +172,9 @@
                   <th>No</th>
                   <th>Balance ID</th>
                   <th>Product Name</th>
-                  <th>Order ID</th>
-                  <th>Order Quantity</th>
                   <th>Date</th>
                   <th>Income Quantity</th>
+                  <th>Sale Quantity</th>
                   <th>Balance</th>
                   <th>Action</th>
                 </tr>
@@ -165,11 +183,10 @@
                 <td>1</td>
                 <td>123</td>
                 <td>Nike Jordan 1</td>
+                <td>12/5/2024</td>
                 <td>2</td>
                 <td>4</td>
-                <td>12/5/2024</td>
-                <td>300</td>
-                <td>40000</td>
+                <td>30</td>
                 <td>
                   <a href="balance_edit.html" type="submit" class="btn btn-outline-success" >Edit</a>
                   <a href="balance_delete.html" class="btn btn-outline-danger" >Delete</a>
